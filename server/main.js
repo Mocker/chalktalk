@@ -170,7 +170,7 @@ String.prototype.contains = function(substr) {
 };
 
 // CREATE THE HTTP SERVER
-var httpserver = http.Server(app);
+const httpserver = http.Server(app);
 
 // WEBSOCKET ENDPOINT SETUP
 try {
@@ -205,4 +205,5 @@ httpserver.listen(parseInt(port, 10), function() {
    console.log("HTTP server listening on port %d", httpserver.address().port);
 });
 
+exports.httpserver = httpserver;
 
