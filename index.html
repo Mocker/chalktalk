@@ -112,6 +112,17 @@
     color: black;
     font-size: 20px;
   }
+
+  #toggleUIBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 110;
+  }
+
+  #cheat-sheet > p {
+    font-size: 22px;
+  }
 </style>
 
 <link rel="manifest" href="manifest.json">
@@ -127,11 +138,19 @@ function loadUI () {
 
 function init () {
   if(ranInit) return;
+  ranInit = true;
   chalkWrapper = document.querySelector('#chalk-wrapper');
   uiWrapper = document.querySelector('#ui-wrapper');
   ChalkTalkStart('#chalk-wrapper');
   document.querySelector('#ui-wrapper > div.modal-dialog').style.display = 'none';
-  uiWrapper.style.display = 'none';
+  
+}
+
+function toggleUI () {
+  uiWrapper.style.display = (uiWrapper.style.display == 'none') ? 'block' : 'none';
+}
+function toggleDropDown () {
+  document.querySelector('#fileDropDown').style.display = (document.querySelector('#fileDropDown').style.display == 'none') ? 'block' : 'none';
 }
 
 function openFullScreen(elem) {
@@ -174,7 +193,42 @@ function openFullScreen(elem) {
           </div>
         </div>
       </div>
-    </div>
+
+      <nav class="nav navbar-dark bg-dark">
+        <a class="nav-link" href="#">Digital Gis</a>
+       
+        <div class="dropdown nav-link">
+          <a class="btn btn-light dropdown-toggle" onClick="toggleDropDown();" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            File
+          </a>
+        
+          <div id="fileDropDown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Load</a>
+            <a class="dropdown-item" href="#">Save</a>
+            <a class="dropdown-item" href="#">Exit</a>
+          </div>
+        </div>
+      </nav>
+
+      <div id="cheat-sheet" class="container-lg">
+        <p>Chalktalk's interface consists primarily of two conventions:
+          <br>
+          Clicking and dragging on the background draws a set of lines, and<br>
+          By clicking without dragging, you can activate a series of invisible radial menus.
+        </p>
+        <p>The reason they're invisible is because of Chalktalk's use in presentations: the focus should be on the content you're showing instead of the interface.
+      
+          However, as a helpful tool for beginners, pressing Space activates "help mode", which makes these radial menus visible. You may also press the UI button at the top right.
+      </p>
+        <img src="https://raw.githubusercontent.com/wiki/kenperlin/chalktalk/images/helpmode.png" />
+        <button type="button" class="btn btn-dark" onClick="toggleUI();">Return to ChalkTalk</button>
+      </div>
+ </div> <!-- end ui-->
+
+    <button id="toggleUIBtn" type="button" class="btn btn-light" onClick="toggleUI();">UI</button>
+
+    
+
   <div id="chalk-wrapper">
 
   </div>
